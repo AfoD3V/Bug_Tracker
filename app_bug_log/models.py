@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Topic(models.Model):
+class Bug(models.Model):
     """Bug reported by user"""
 
     text = models.CharField(max_length=200)
