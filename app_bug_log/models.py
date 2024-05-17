@@ -83,3 +83,17 @@ class Bug(models.Model):
     def __str__(self):
         """Returning Bug id/title with description"""
         return f"{self.id}: [{self.title}] - {self.description}"
+
+class Comment(models.Model):
+    "Comment used by user to update info about particular issue"
+
+    bug = models.ForeignKey(Bug, on_delete=models.CASCADE)
+    text = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'comments'
+
+    def __str__(self):
+        """Returning back representation of a model in a form of text string"""
+        return f"{self.text[:50]}..."
