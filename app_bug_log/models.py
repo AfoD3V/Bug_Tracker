@@ -1,5 +1,6 @@
 from django.db import models
 from enum import Enum
+import uuid
 
 
 class Status(Enum):
@@ -43,7 +44,7 @@ class Bug(models.Model):
     SEVERITY_CHOICES = enums_to_choice(Severity)
 
     # Fields
-    bug_id = models.AutoField(primary_key=True, default="00000")
+    id = models.CharField(max_length=20, primary_key=True, editable=False, unique=True)
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=1000)
     date_added = models.DateTimeField(auto_now_add=True)
@@ -68,6 +69,17 @@ class Bug(models.Model):
         default=PRIORITY_CHOICES[1][1],  # Medium
     )
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.id = self.generate_unique_id()
+        super().save(*args, **kwargs)
+
+    def generate_unique_id(self):
+        while True:
+            new_id = str(uuid.uuid4())[:8]
+            if not Bug.objects.filter(id=new_id).exists():
+                return new_id
+
     def __str__(self):
         """Returning Bug id/title with description"""
-        return f"{self.bug_id}:{self.title} - {self.description}"
+        return f"{self.id}: [{self.title}] - {self.description}"
