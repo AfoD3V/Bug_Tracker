@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def index(request):
+    """App home page"""
+    return render(request, "app_bug_log/index.html")
