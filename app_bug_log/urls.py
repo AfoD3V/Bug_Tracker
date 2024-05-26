@@ -7,4 +7,5 @@ app_name = "app_bug_log"
 urlpatterns = [
     # home page
     path("", views.index, name="index"),
+    path("bugs/", views.bugs, name="bugs"),
 ]
