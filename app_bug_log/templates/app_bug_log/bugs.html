@@ -4,7 +4,9 @@
 <p>Bug's Index</p>
 <ul>
     {% for bug in bugs %}
-    <li>{{bug}}</li>
+    <li>
+        <a href="{% url 'app_bug_log:bug' bug.id %}">{{ bug }}</a>
+    </li>
     {% empty %}
     <li>No bugs to view are available yet...</li>
     {% endfor %}

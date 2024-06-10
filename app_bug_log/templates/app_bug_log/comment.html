@@ -1,0 +1,19 @@
+{% extends 'app_bug_log/base.html' %}
+
+{% block content %}
+
+<p>Comments Section for {{ bug }}</p>
+
+<p>Comments:</p>
+<ul>
+    {% for comment in comments %}
+    <li>
+        <p>{{ comment.date_added|date:'d M Y H:i' }}</p>
+        <p>{{ comment.text|linebreaks }}</p>
+    </li>
+    {% empty %}
+    <li>No comments available...</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
