@@ -5,11 +5,15 @@
 <p>Comments Section for {{ bug }}</p>
 
 <p>Comments:</p>
+<p>
+    <a href="{% url 'app_bug_log:new_comment' bug.id %}">Add new comment...</a>
+</p>
 <ul>
     {% for comment in comments %}
     <li>
         <p>{{ comment.date_added|date:'d M Y H:i' }}</p>
         <p>{{ comment.text|linebreaks }}</p>
+        <p><a href="{% url 'app_bug_log:edit_comment' comment.id %}">Edit comment</a></p>
     </li>
     {% empty %}
     <li>No comments available...</li>

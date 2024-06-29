@@ -1,0 +1,12 @@
+{% extends "app_bug_log/base.html" %}
+
+{% block content %}
+<p>Add new bug...</p>
+
+<form action="{% url 'app_bug_log:new_bug' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Save</button>
+</form>
+
+{% endblock content %}
